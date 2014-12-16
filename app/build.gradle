@@ -1,17 +1,6 @@
 apply plugin: 'com.android.application'
 
-// get VersionName in AndroidManifest.xml
-// manifest element 안에 android:versionName이 있어야 동작함.
-// AndroidStudio로 처음 생성하면 이 필드가 없음.
-def getVersionNameInManifest() {
-    def manifestFile = file(project.projectDir.absolutePath + '/src/main/AndroidManifest.xml')
-    def nameSpace = new groovy.xml.Namespace("http://schemas.android.com/apk/res/android", "android")
-    def xml = new XmlParser().parse(manifestFile)
-
-    return xml.attributes()[nameSpace.versionName].toString()
-}
-
-project.ext.versionName = getVersionNameInManifest()
+//project.ext.versionName = getVersionNameInManifest()
 
 android {
     signingConfigs {
@@ -41,54 +30,74 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0.0"
+
         applicationVariants.all { variant ->
             // In Android Studio VER 1.0, Must add below lines.
             variant.outputs.each { output ->
                 def file = output.outputFile
-                output.outputFile = new File(file.parent, file.name.replace(".apk", "-" + project.ext.versionName + ".apk"))
-            } 
+                output.outputFile = new File(file.parent,
+                        file.name.replace(".apk", "-"+ defaultConfig.versionName
+                                + "-" + defaultConfig.versionCode + ".apk"))
+            }
         }
     }
     buildTypes {
-        def VERSION_NAME = defaultConfig.versionName
-        def VERSION_CODE = defaultConfig.versionCode
+        // Value 반드시 ""로 묶어줘야 함.
+        def VERSION_NAME = "\" + defaultConfig.versionName + \""
+        def INT_V = "3"
+        def DOUBLE_V = "1.0234"
+        def BOOLEAN_V = "false"
+        // type 실제 java에서 쓰는 타입
+        def STRING = "String"
+        def FLOAT = "double"
+        def INT = "int"
+        def BOOLEAN = "boolean"
+        // Filed instance Name
+        def STRING_FIELD = "STRING_V"
+        def INT_FIELD = "INT_V"
+        def DOUBLE_FIELD = "DOUBLE_V"
+        def BOOLEAN_FIELD = "BOOLEAN_V"
 
         release {
             versionNameSuffix "-rrrr"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            buildConfigField "String", "APP_VERSION_NAME", defaultConfig.versionName
-            buildConfigField "int", "APP_VERSION_CODE", defaultConfig.versionCode
 
+            buildConfigField STRING, STRING_FIELD, VERSION_NAME
+            buildConfigField INT, INT_FIELD, INT_V
+            buildConfigField FLOAT, DOUBLE_FIELD, DOUBLE_V
+            buildConfigField BOOLEAN, BOOLEAN_FIELD, BOOLEAN_V
         }
 
         debug {
             versionNameSuffix "-dddd"
             signingConfig signingConfigs.debug
-            buildConfigField "String", "APP_VERSION_NAME", defaultConfig.versionName
-            buildConfigField "int", "APP_VERSION_CODE", defaultConfig.versionCode
 
+            buildConfigField STRING, STRING_FIELD, VERSION_NAME
+            buildConfigField INT, INT_FIELD, INT_V
+            buildConfigField FLOAT, DOUBLE_FIELD, DOUBLE_V
+            buildConfigField BOOLEAN, BOOLEAN_FIELD, BOOLEAN_V
         }
     }
     lintOptions {
         abortOnError false
     }
-    productFlavors {
-        flavor_dddd {
-            minSdkVersion 18
-            applicationId 'me.yeojoy.testapp'
-            signingConfig signingConfigs.debug
-            targetSdkVersion 21
-        }
-
-        flavor_release {
-            minSdkVersion 18
-            applicationId 'me.yeojoy.testapp'
-            signingConfig signingConfigs.release
-            targetSdkVersion 21
-        }
-    }
+//    productFlavors {
+//        tests {
+//            minSdkVersion 18
+//            applicationId 'me.yeojoy.testapp'
+//            signingConfig signingConfigs.debug
+//            targetSdkVersion 21
+//        }
+//
+//        rel {
+//            minSdkVersion 18
+//            applicationId 'me.yeojoy.testapp'
+//            signingConfig signingConfigs.release
+//            targetSdkVersion 21
+//        }
+//    }
 }
 
 dependencies {
@@ -101,13 +110,24 @@ dependencies {
 }
 
 // set variable dynamically
-def runTasks = gradle.startParameter.taskNames
-if ('assemble' in runTasks | 'assembleRelease' in runTasks) {
-    //android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
-    //android.signingConfigs.release.keyAlias = System.console().readPassword('\nAlias Name: ')
-    //android.signingConfigs.release.keyPassword = System.console().readPassword('\nAlias Password: ')
-} else if ('assembleDebug' in runTasks) {
-    //android.signingConfigs.debug.storePassword = System.console().readPassword('\nDebug KeyStore Password: ')
-    //android.signingConfigs.debug.keyAlias = System.console().readPassword('\nDebug Alias Name: ')
-    //android.signingConfigs.debug.keyPassword = System.console().readPassword('\nDebug Alias Password: ')
-}
+//def runTasks = gradle.startParameter.taskNames
+//if ('assemble' in runTasks | 'assembleRelease' in runTasks) {
+//    android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
+//    android.signingConfigs.release.keyAlias = System.console().readPassword('\nAlias Name: ')
+//    android.signingConfigs.release.keyPassword = System.console().readPassword('\nAlias Password: ')
+//} else if ('assembleDebug' in runTasks) {
+//    android.signingConfigs.debug.storePassword = System.console().readPassword('\nDebug KeyStore Password: ')
+//    android.signingConfigs.debug.keyAlias = System.console().readPassword('\nDebug Alias Name: ')
+//    android.signingConfigs.debug.keyPassword = System.console().readPassword('\nDebug Alias Password: ')
+//}
+
+// get VersionName in AndroidManifest.xml
+// manifest element 안에 android:versionName이 있어야 동작함.
+// AndroidStudio로 처음 생성하면 이 필드가 없음.
+//def getVersionNameInManifest() {
+//    def manifestFile = file(project.projectDir.absolutePath + '/src/main/AndroidManifest.xml')
+//    def nameSpace = new groovy.xml.Namespace("http://schemas.android.com/apk/res/android", "android")
+//    def xml = new XmlParser().parse(manifestFile)
+//
+//    return xml.attributes()[nameSpace.versionName].toString()
+//}
