@@ -43,8 +43,6 @@
         </activity>
         <activity android:name=".HandlerThreadActivity">
         </activity>
-        <activity android:name=".MyListActivity">
-        </activity>
     </application>
 
 </manifest>

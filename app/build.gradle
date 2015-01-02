@@ -17,33 +17,34 @@ android {
             keyPassword 'android'
             storePassword 'android'
 
-            project.archivesBaseName = 'my_test_app'
         }
 
     }
     compileSdkVersion 21
-    buildToolsVersion "21.1.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "me.yeojoy.testapp"
-        minSdkVersion 18
+        minSdkVersion 16
         targetSdkVersion 21
         versionCode 1
         versionName "1.0.0"
+
+        project.archivesBaseName = 'my_test_app'
 
         applicationVariants.all { variant ->
             // In Android Studio VER 1.0, Must add below lines.
             variant.outputs.each { output ->
                 def file = output.outputFile
                 output.outputFile = new File(file.parent,
-                        file.name.replace(".apk", "-"+ defaultConfig.versionName
-                                + "-" + defaultConfig.versionCode + ".apk"))
+                        file.name.replace(".apk", "-"+ defaultConfig.versionCode
+                                + "-v" + defaultConfig.versionName + ".apk"))
             }
         }
     }
     buildTypes {
-        // Value 반드시 ""로 묶어줘야 함.
-        def VERSION_NAME = "\" + defaultConfig.versionName + \""
+        // Value 반드시 ""로 묶어줘야 함. String은 "\"String\"" 한번 더
+        def STRING_V = "\"Hello world!\""
         def INT_V = "3"
         def DOUBLE_V = "1.0234"
         def BOOLEAN_V = "false"
@@ -64,7 +65,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 
-            buildConfigField STRING, STRING_FIELD, VERSION_NAME
+            buildConfigField STRING, STRING_FIELD, STRING_V
             buildConfigField INT, INT_FIELD, INT_V
             buildConfigField FLOAT, DOUBLE_FIELD, DOUBLE_V
             buildConfigField BOOLEAN, BOOLEAN_FIELD, BOOLEAN_V
@@ -74,7 +75,7 @@ android {
             versionNameSuffix "-dddd"
             signingConfig signingConfigs.debug
 
-            buildConfigField STRING, STRING_FIELD, VERSION_NAME
+            buildConfigField STRING, STRING_FIELD, STRING_V
             buildConfigField INT, INT_FIELD, INT_V
             buildConfigField FLOAT, DOUBLE_FIELD, DOUBLE_V
             buildConfigField BOOLEAN, BOOLEAN_FIELD, BOOLEAN_V
@@ -106,7 +107,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.2'
     compile 'com.google.android.gms:play-services:6.5.87'
     compile 'com.squareup.okhttp:okhttp:2.1.0'
-    compile project(':my_lib')
 }
 
 // set variable dynamically
