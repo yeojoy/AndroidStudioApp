@@ -99,8 +99,13 @@ public class MyAdapter extends BaseAdapter {
         mItems.add(item);
         notifyDataSetChanged();
     }
-    
+
+    /**
+     * 선택한 data isChecked 값을 바꾸고 refresh 한다.
+     * @param position
+     */
     public void setChecked(int position) {
+        // Checkbox 류의 on/off는 data에 toggle을 구현하면 좀 더 쉽다.
         mItems.get(position).toggleChecked();
         
         notifyDataSetChanged();
