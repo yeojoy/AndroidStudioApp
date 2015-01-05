@@ -46,4 +46,12 @@
         android:layout_marginTop="20dp"
         android:text="list"
         android:onClick="onClick"/>
+    <Button
+        android:id="@+id/btn_push"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_list"
+        android:layout_marginTop="20dp"
+        android:text="push"
+        android:onClick="onClick"/>
 </RelativeLayout>

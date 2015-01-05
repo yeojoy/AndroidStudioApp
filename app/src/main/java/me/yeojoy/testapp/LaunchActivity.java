@@ -48,6 +48,11 @@ public class LaunchActivity extends Activity {
                 newIntent = new Intent(this, MyListActivity.class);
                 startActivity(newIntent);
                 break;
+            case R.id.btn_push:
+                Log.i(TAG, "go to PushActivity");
+                newIntent = new Intent(this, PushActivity.class);
+                startActivity(newIntent);
+                break;
         }
     }
 }

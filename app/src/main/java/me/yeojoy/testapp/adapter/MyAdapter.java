@@ -111,6 +111,17 @@ public class MyAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    /**
+     * 전체 선택 or 전체 선택 해제*
+     * @param isAllChecked
+     */
+    public void setAllChecked(boolean isAllChecked) {
+        for (Dust d : mItems)
+            d.setChecked(isAllChecked);
+        
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder {
         public TextView locality;
         public TextView pm10;
