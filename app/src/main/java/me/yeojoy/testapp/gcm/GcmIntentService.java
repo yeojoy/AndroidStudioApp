@@ -14,6 +14,8 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import me.yeojoy.testapp.PushActivity;
 import me.yeojoy.testapp.R;
+import me.yeojoy.testapp.dto.NotiData;
+import me.yeojoy.testapp.noti.MyNotiManager;
 
 /**
  * Created by yeojoy on 15. 1. 5..
@@ -23,8 +25,9 @@ public class GcmIntentService extends IntentService {
             
     public static final int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
-    NotificationCompat.Builder builder;
 
+    private Context mContext;
+    
     public GcmIntentService() {
         super("GcmIntentService");
     }
@@ -39,6 +42,8 @@ public class GcmIntentService extends IntentService {
         // in your BroadcastReceiver.
         String messageType = gcm.getMessageType(intent);
 
+        mContext = this;
+        
         if (!extras.isEmpty()) {  // has effect of unparcelling Bundle
             /*
              * Filter messages based on message type. Since it is likely that GCM
@@ -67,7 +72,18 @@ public class GcmIntentService extends IntentService {
 //                }
 //                Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
-                sendNotification("Received: " + extras.toString());
+                NotiData data = new NotiData(
+                        Integer.parseInt(extras.getString("id")),
+                        Integer.parseInt(extras.getString("type")),
+                        extras.getString("message"),
+                        extras.getInt("android.support.content.wakelockid"),
+                        extras.getString("collapse_key"),
+                        extras.getString("from")
+                );
+
+                MyNotiManager.showNotification(mContext, data);
+                
+//                sendNotification("Received: " + extras.toString());
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -80,13 +96,13 @@ public class GcmIntentService extends IntentService {
     // a GCM message.
     private void sendNotification(String msg) {
         mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
+                mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, PushActivity.class), 0);
+        PendingIntent contentIntent = PendingIntent.getActivity(mContext, 0,
+                new Intent(mContext, PushActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
+                new NotificationCompat.Builder(mContext)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle("GCM Notification")
                         .setStyle(new NotificationCompat.BigTextStyle()
