@@ -39,17 +39,17 @@ public class MyNotiManager {
      */
     public static void showNotification(final Context context, final NotiData data) {
         switch (data.getType()) {
-            case 1:
+            case 2:
                 data.setTitle("ColorFont Noti");
                 data.setIconResourceId(R.drawable.ic_launcher);
                 notificationWithColorFont(context, data, PushActivity.class);
                 break;
-            case 2:
+            case 3:
                 data.setTitle("Big Text Noti");
                 data.setIconResourceId(R.drawable.icon);
                 notificationWithBigText(context, data, PushActivity.class);
                 break;
-            case 3:
+            case 4:
                 Glide.with(context)
                         .load(PUSH_BANNER_IMAGE_URL)
                         .asBitmap()
@@ -65,10 +65,36 @@ public class MyNotiManager {
                         });
 
                 break;
+            
+            default:
+                data.setTitle("Default Text Noti");
+                data.setIconResourceId(R.drawable.icon);
+                sendDefaultNotification(context, data);
+                break;
         }
         
     }
 
+    // Put the message into a notification and post it.
+    // This is just one simple example of what you might choose to do with
+    // a GCM message.
+    private static void sendDefaultNotification(Context context, NotiData data) {
+        NotificationManager notificationManager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                new Intent(context, PushActivity.class), 0);
+
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(context)
+                        .setSmallIcon(R.drawable.ic_launcher)
+                        .setContentTitle(data.getTitle())
+                        .setContentText(data.getMessage());
+
+        mBuilder.setContentIntent(contentIntent);
+        notificationManager.notify(data.getId(), mBuilder.build());
+    }
+    
     private static void notificationWithColorFont(Context context, NotiData data,
                                                   Class<?> activityClass) {
 
