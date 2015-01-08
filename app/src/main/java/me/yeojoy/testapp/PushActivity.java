@@ -62,6 +62,9 @@ public class PushActivity extends FragmentActivity {
         
         context = this;
         mDisplay = (TextView) findViewById(R.id.tv_display);
+        if (getRegistrationId(context) != null) {
+            mDisplay.setText(getRegistrationId(context));
+        }
     }
 
     // You need to do the Play Services APK check here too.
