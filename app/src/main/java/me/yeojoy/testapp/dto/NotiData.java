@@ -16,6 +16,16 @@ public class NotiData {
     private int iconResourceId;
     private String title;
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    private String summary;
+
     public NotiData() {}
 
     public NotiData(int id, int type, String message, int wakelockId, String collapseKey, String from) {
@@ -113,6 +123,7 @@ public class NotiData {
                 ", from='" + from + '\'' +
                 ", iconResourceId=" + iconResourceId +
                 ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
                 '}';
     }
 }

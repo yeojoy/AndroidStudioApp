@@ -5,4 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="LabelTextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/background_dark</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
 </resources>

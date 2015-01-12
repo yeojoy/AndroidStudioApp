@@ -7,6 +7,7 @@ import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by yeojoy on 15. 1. 2..
@@ -17,7 +18,7 @@ public class HandlerThreadActivity extends Activity {
     private HandlerThread mHandlerThread = null;
     
     private TextView mTv;
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +38,8 @@ public class HandlerThreadActivity extends Activity {
             public void run() {
                 SystemClock.sleep(3000);
 
-//                Toast.makeText(HandlerThreadActivity.this,
-//                        "5초 작업 끝", Toast.LENGTH_SHORT).show();
-                mTv.setText("3초 작업 끝");
+                Toast.makeText(HandlerThreadActivity.this,
+                        "5초 작업 끝", Toast.LENGTH_SHORT).show();
             }
         };
         mHandler.post(worker);

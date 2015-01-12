@@ -1,9 +1,10 @@
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
+    android:orientation="vertical"
     tools:context=".MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment" >
 
@@ -18,7 +19,6 @@
         android:id="@+id/btn_maps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_network"
         android:layout_marginTop="20dp"
         android:text="google map"
         android:onClick="onClick"/>
@@ -26,7 +26,6 @@
         android:id="@+id/btn_graph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_maps"
         android:layout_marginTop="20dp"
         android:text="graph"
         android:onClick="onClick"/>
@@ -34,7 +33,6 @@
         android:id="@+id/btn_thread"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_graph"
         android:layout_marginTop="20dp"
         android:text="thread"
         android:onClick="onClick"/>
@@ -42,7 +40,6 @@
         android:id="@+id/btn_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_thread"
         android:layout_marginTop="20dp"
         android:text="list"
         android:onClick="onClick"/>
@@ -50,8 +47,14 @@
         android:id="@+id/btn_push"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_list"
         android:layout_marginTop="20dp"
         android:text="push"
         android:onClick="onClick"/>
-</RelativeLayout>
+    <Button
+        android:id="@+id/btn_noti"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="noti"
+        android:onClick="onClick"/>
+</LinearLayout>

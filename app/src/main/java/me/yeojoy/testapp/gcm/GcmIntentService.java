@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -49,15 +51,24 @@ public class GcmIntentService extends IntentService {
              * recognize.
              */
 
-            NotiData data = new NotiData(
-                    Integer.parseInt(extras.getString("id")),
-                    Integer.parseInt(extras.getString("type")),
-                    extras.getString("message"),
-                    extras.getInt("android.support.content.wakelockid"),
-                    extras.getString("collapse_key"),
-                    extras.getString("from")
-            );
+            Log.d(TAG, "Received Bundle : " + intent.getExtras().toString());
             
+            NotiData data = new NotiData();
+            if (extras.getString("id") != null)
+                data.setId(Integer.parseInt(extras.getString("id")));
+            if (extras.getString("type") != null)
+                data.setType(Integer.parseInt(extras.getString("type")));
+            if (extras.getString("option") != null)
+                data.setMessage(extras.getString("option"));
+            if (extras.getString("collapse_key") != null)
+                data.setCollapseKey(extras.getString("collapse_key"));
+            if (extras.getString("from") != null)
+                data.setFrom(extras.getString("from"));
+            if (extras.getString("default") != null)
+                data.setTitle(extras.getString("default"));
+            
+            data.setWakelockId(extras.getInt("android.support.content.wakelockid"));
+
             if (GoogleCloudMessaging.
                     MESSAGE_TYPE_SEND_ERROR.equals(messageType)) {
                 data.setMessage("Send error: " + extras.toString());
@@ -74,8 +85,9 @@ public class GcmIntentService extends IntentService {
                 MyNotiManager.showNotification(mContext, data);
 
             }
-            Log.i(TAG, "Received: " + data.toString());
+            Log.i(TAG, "Data: " + data.toString());
         }
+        
         // Release the wake lock provided by the WakefulBroadcastReceiver.
         GcmBroadcastReceiver.completeWakefulIntent(intent);
     }

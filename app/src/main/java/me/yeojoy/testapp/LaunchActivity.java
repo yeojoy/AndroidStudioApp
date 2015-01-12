@@ -53,6 +53,11 @@ public class LaunchActivity extends Activity {
                 newIntent = new Intent(this, PushActivity.class);
                 startActivity(newIntent);
                 break;
+            case R.id.btn_noti:
+                Log.i(TAG, "go to NotiActivity");
+                newIntent = new Intent(this, NotiActivity.class);
+                startActivity(newIntent);
+                break;
         }
     }
 }

@@ -54,6 +54,8 @@
         </activity>
         <activity android:name=".PushActivity">
         </activity>
+        <activity android:name=".NotiActivity">
+        </activity>
 
         <receiver
             android:name=".gcm.GcmBroadcastReceiver"

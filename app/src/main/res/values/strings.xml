@@ -4,4 +4,23 @@
     <string name="app_name">Test App</string>
     <string name="title_activity_maps">MyMap</string>
 
+    <string name="type_1">TYPE_1</string>
+    <string name="type_2">TYPE_2</string>
+    <string name="type_3">TYPE_3</string>
+    <string name="type_4">TYPE_4</string>
+    
+    <string name="noti_id_1">ID_1</string>
+    <string name="noti_id_2">ID_2</string>
+    <string name="noti_id_3">ID_3</string>
+    <string name="noti_id_4">ID_4</string>
+    
+    <string name="label_type">Notification Layout View Type</string>
+    <string name="label_id">Notification ID</string>
+    <string name="label_title">Notification Title</string>
+    <string name="label_msg">Notification Message</string>
+    <string name="label_summary">Notification Summary</string>
+
+    <string name="hint_title">Title. Test Noti</string>
+    <string name="hint_message">Message. Radio buttons allow the user to select one option from a set. You should use radio buttons for optional sets that are mutually exclusive if you think that the user needs to see all available options side-by-side. If it\'s not necessary to show all options side-by-side, use a spinner instead.</string>
+    <string name="hint_summary">Summary. Radio buttons allow the user to select one option from a set.</string>
 </resources>

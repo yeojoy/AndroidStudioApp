@@ -1,10 +1,12 @@
 package me.yeojoy.testapp;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -64,6 +66,7 @@ public class PushActivity extends FragmentActivity {
         mDisplay = (TextView) findViewById(R.id.tv_display);
         if (getRegistrationId(context) != null) {
             mDisplay.setText(getRegistrationId(context));
+            ClipData clip = ClipData.newPlainText("simple text", mDisplay.getText().toString());
         }
     }
 

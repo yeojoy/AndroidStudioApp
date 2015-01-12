@@ -25,10 +25,6 @@ import me.yeojoy.testapp.dto.NotiData;
  */
 public class MyNotiManager {
 
-    private static final String PUSH_TITLE = "안녕하세요 제목 구간입니다.";
-    private static final String PUSH_CONTENT = "푸쉬 내용 구간입니다. 푸쉬 내용"
-            + " 구간입니다. 푸쉬 내용 구간입니다. 푸쉬 내용 구간입니다. 푸쉬"
-            + " 내용 구간입니다. 푸쉬 내용 구간입니다.";
     private static final String PUSH_BANNER_IMAGE_URL = "http://healthconnect.cafe24.com/wp-content/uploads/2012/08/main_silder_02.jpg";
 
     /**
@@ -40,12 +36,10 @@ public class MyNotiManager {
     public static void showNotification(final Context context, final NotiData data) {
         switch (data.getType()) {
             case 2:
-                data.setTitle("ColorFont Noti");
                 data.setIconResourceId(R.drawable.ic_launcher);
                 notificationWithColorFont(context, data, PushActivity.class);
                 break;
             case 3:
-                data.setTitle("Big Text Noti");
                 data.setIconResourceId(R.drawable.icon);
                 notificationWithBigText(context, data, PushActivity.class);
                 break;
@@ -57,7 +51,6 @@ public class MyNotiManager {
                             @Override
                             public void onResourceReady(Bitmap bitmap,
                                     GlideAnimation<? super Bitmap> glideAnimation) {
-                                data.setTitle("Bit Picture Noti");
                                 data.setIconResourceId(R.drawable.icon_1);
                                 notificationWithBigPicture(context, data,
                                         bitmap, PushActivity.class);
@@ -154,7 +147,7 @@ public class MyNotiManager {
                 .setAutoCancel(true);
 
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
-        style.setSummaryText("Joycity summary Text");
+        style.setSummaryText(data.getSummary());
         style.setBigContentTitle("b_" + data.getTitle());
         style.bigText("b_" + data.getMessage());
 
@@ -197,7 +190,7 @@ public class MyNotiManager {
         NotificationCompat.BigPictureStyle style
                 = new NotificationCompat.BigPictureStyle();
         style.setBigContentTitle("b_" + data.getTitle());
-        style.setSummaryText("summaryText");
+        style.setSummaryText(data.getSummary());
         style.bigPicture(banner);
 
         builder.setStyle(style);
