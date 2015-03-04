@@ -1,4 +1,4 @@
-package me.yeojoy.testapp.gcm;
+package me.yeojoy.studio.gcm;
 
 import android.app.Activity;
 import android.content.ComponentName;

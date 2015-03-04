@@ -1,4 +1,4 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

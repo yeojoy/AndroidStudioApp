@@ -1,4 +1,4 @@
-package me.yeojoy.testapp.noti;
+package me.yeojoy.studio.noti;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -9,16 +9,19 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.widget.RemoteViews;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
-import me.yeojoy.testapp.BuildConfig;
-import me.yeojoy.testapp.PushActivity;
-import me.yeojoy.testapp.R;
-import me.yeojoy.testapp.dto.NotiData;
+import me.yeojoy.studio.BuildConfig;
+import me.yeojoy.studio.PushActivity;
+import me.yeojoy.studio.R;
+import me.yeojoy.studio.dto.NotiData;
 
 /**
  * Created by yeojoy on 15. 1. 6..
@@ -37,8 +40,10 @@ public class MyNotiManager {
         switch (data.getType()) {
             case 2:
                 data.setIconResourceId(R.drawable.ic_launcher);
-                notificationWithColorFont(context, data, PushActivity.class);
+                notificationWithInBoxStyle(context, data, PushActivity.class);
+//                notificationWithColorFont(context, data, PushActivity.class);
                 break;
+            
             case 3:
                 data.setIconResourceId(R.drawable.icon);
                 notificationWithBigText(context, data, PushActivity.class);
@@ -128,6 +133,59 @@ public class MyNotiManager {
      * 하위 버젼에서는 일반적인 Notification UI가 노출 됩니다.
      */
 
+    private static void notificationWithInBoxStyle(Context context, NotiData data,
+                                                Class<?> activityClass) {
+
+        Bitmap largeIcon = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.icon_1);
+
+        Intent intent = new Intent(context, activityClass);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, 
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
+                .setSmallIcon(data.getIconResourceId())
+                .setTicker("ticker_" + data.getTitle())
+                .setAutoCancel(true)
+                
+                .setContentTitle("5 New mails from yeojoy.kim")
+                .setContentText(data.getMessage())
+                .setLargeIcon(largeIcon);
+
+
+        NotificationCompat.InboxStyle style = new NotificationCompat.InboxStyle();
+        // Spannable로 스타일을 먹인 것. 안 그러면 일반 평문이 됨. 스타일 변경 된 거 사이에 공백 3칸이 괜찮음.
+        Spannable sb = new SpannableString("yeojoy   hi");
+        sb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        sb.setSpan(new StyleSpan(android.graphics.Typeface.ITALIC), 6, sb.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        style.addLine(sb);
+
+        sb = new SpannableString("yeojoy   hello");
+        sb.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        style.addLine(sb);
+        
+        
+        style.setBigContentTitle("2 New Messages.")
+                .setSummaryText("+3 more");
+        
+        builder.setStyle(style);
+        builder.setContentIntent(pendingIntent);
+        
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
+        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        NotificationManager notificationManager = (NotificationManager) 
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(data.getId(), builder.build());
+    }
+    
+    /**
+     * Notification UI 중 BigTextStyle 입니다.
+     * 노출된 notification에서 두 손가락을 이용해 아래로 드래그 하면 expand 되면서
+     * 긴 텍스트가 노출됩니다.
+     * Android 4.1에서 부터 추가된 기능으로 하위 버젼에서는 expand 되지 않습니다,
+     * 하위 버젼에서는 일반적인 Notification UI가 노출 됩니다.
+     */
+
     private static void notificationWithBigText(Context context, NotiData data,
                                                 Class<?> activityClass) {
 
@@ -146,6 +204,7 @@ public class MyNotiManager {
                 .setContentText(data.getMessage())
                 .setAutoCancel(true);
 
+
         NotificationCompat.BigTextStyle style = new NotificationCompat.BigTextStyle();
         style.setSummaryText(data.getSummary());
         style.setBigContentTitle("b_" + data.getTitle());
@@ -153,6 +212,8 @@ public class MyNotiManager {
 
         builder.setStyle(style);
         builder.setContentIntent(pendingIntent);
+        
+        builder.addAction(android.R.drawable.ic_dialog_alert, "Alert", pendingIntent);
 
         builder.setDefaults(Notification.DEFAULT_VIBRATE);
         builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));

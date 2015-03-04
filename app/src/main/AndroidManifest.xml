@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.yeojoy.testapp" >
+    package="me.yeojoy.studio" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-    <permission android:name="me.yeojoy.testapp.permission.C2D_MESSAGE"
+    <permission android:name="me.yeojoy.studio.permission.C2D_MESSAGE"
                 android:protectionLevel="signature" />
     <uses-permission android:name="me.yeojoy.testapp.permission.C2D_MESSAGE" />
     
@@ -34,38 +34,38 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="me.yeojoy.studio.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".GraphActivity">
+            android:name="me.yeojoy.studio.GraphActivity">
         </activity>
-        <activity android:name=".LaunchActivity">
+        <activity android:name="me.yeojoy.studio.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NetworkActivity">
+        <activity android:name="me.yeojoy.studio.NetworkActivity">
         </activity>
-        <activity android:name=".HandlerThreadActivity">
+        <activity android:name="me.yeojoy.studio.HandlerThreadActivity">
         </activity>
-        <activity android:name=".MyListActivity">
+        <activity android:name="me.yeojoy.studio.MyListActivity">
         </activity>
-        <activity android:name=".PushActivity">
+        <activity android:name="me.yeojoy.studio.PushActivity">
         </activity>
-        <activity android:name=".NotiActivity">
+        <activity android:name="me.yeojoy.studio.NotiActivity">
         </activity>
 
         <receiver
-            android:name=".gcm.GcmBroadcastReceiver"
+            android:name="me.yeojoy.studio.gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <category android:name="com.example.gcm" />
             </intent-filter>
         </receiver>
-        <service android:name=".gcm.GcmIntentService" />
+        <service android:name="me.yeojoy.studio.gcm.GcmIntentService" />
     </application>
 
 </manifest>

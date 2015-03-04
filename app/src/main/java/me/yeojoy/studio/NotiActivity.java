@@ -1,7 +1,6 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,8 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
-import me.yeojoy.testapp.dto.NotiData;
-import me.yeojoy.testapp.noti.MyNotiManager;
+import me.yeojoy.studio.dto.NotiData;
+import me.yeojoy.studio.noti.MyNotiManager;
 
 /**
  * Created by yeojoy on 14. 12. 12..

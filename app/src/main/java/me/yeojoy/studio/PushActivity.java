@@ -1,4 +1,4 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.content.ClipData;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.ClipboardManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,10 +13,6 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -216,11 +211,13 @@ public class PushActivity extends FragmentActivity {
                     String msg = "";
                     try {
                         Bundle data = new Bundle();
-                        data.putString("my_message", "Hello World");
-                        data.putString("my_action",
-                                "com.google.android.gcm.demo.app.ECHO_NOW");
-//                        String id = Integer.toString(msgId.incrementAndGet());
-                        String id = getRegistrationId(context);
+                        data.putString("title", "안녕!");
+                        data.putString("message", "그냥 한 번 보내봄");
+                        data.putInt("id", 10001);
+                        data.putString("summary", "이건 요약.");
+                        data.putInt("type", 3);
+                        String id = Integer.toString(msgId.incrementAndGet());
+                        Log.d(TAG, "ID : " + id + ", Data : " + data.toString());
                         gcm.send(SENDER_ID + "@gcm.googleapis.com", id, data);
                         msg = "Sent message";
                     } catch (IOException ex) {
@@ -231,6 +228,7 @@ public class PushActivity extends FragmentActivity {
 
                 @Override
                 protected void onPostExecute(String msg) {
+                    Log.i(TAG, "onPostExecute()");
                     mDisplay.append(msg + "\n");
                 }
             }.execute(null, null, null);

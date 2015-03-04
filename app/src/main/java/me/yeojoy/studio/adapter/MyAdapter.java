@@ -1,4 +1,4 @@
-package me.yeojoy.testapp.adapter;
+package me.yeojoy.studio.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,14 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import me.yeojoy.testapp.R;
-import me.yeojoy.testapp.dto.Dust;
+import me.yeojoy.studio.R;
+import me.yeojoy.studio.dto.Dust;
 
 /**
  * Created by yeojoy on 15. 1. 2..

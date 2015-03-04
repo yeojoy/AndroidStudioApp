@@ -1,4 +1,4 @@
-package me.yeojoy.testapp.dto;
+package me.yeojoy.studio.dto;
 
 /**
  * Created by yeojoy on 14. 12. 12..

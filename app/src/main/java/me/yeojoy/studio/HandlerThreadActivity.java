@@ -1,4 +1,4 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.app.Activity;
 import android.os.Bundle;

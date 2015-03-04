@@ -1,4 +1,4 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,8 +26,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import me.yeojoy.testapp.adapter.MyAdapter;
-import me.yeojoy.testapp.dto.Dust;
+import me.yeojoy.studio.adapter.MyAdapter;
+import me.yeojoy.studio.dto.Dust;
 
 /**
  * Created by yeojoy on 15. 1. 2..

@@ -1,4 +1,4 @@
-package me.yeojoy.testapp;
+package me.yeojoy.studio;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,12 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.OkHttpClient;
@@ -20,10 +14,8 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Date;
 
-import me.yeojoy.testapp.dto.Item;
+import me.yeojoy.studio.dto.Item;
 
 /**
  * Created by yeojoy on 14. 12. 12..
