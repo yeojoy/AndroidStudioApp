@@ -71,30 +71,31 @@ public class MyAdapter extends BaseAdapter {
 
         // 나의 잘못을 알게 해준 방법..
         Dust d = getItem(position);
-        
-        
+
         holder.locality.setText(d.getLocaltity());
         holder.pm10.setText(d.getPm10());
         holder.index.setText(d.getMaxIndex());
         holder.box.setChecked(d.isChecked());
-        
-        holder.box.setTag(d);
-        
+
         return convertView;
     }
 
     public void setItems(List<Dust> items) {
         Log.i(TAG, "setItems()");
+        mItems.clear();
+
         this.mItems = items;
         notifyDataSetChanged();
     }
 
     public void addItems(List<Dust> items) {
+        Log.i(TAG, "addItems()");
         mItems.addAll(items);
         notifyDataSetChanged();
     }
 
     public void addItem(Dust item) {
+        Log.i(TAG, "addItem()");
         mItems.add(item);
         notifyDataSetChanged();
     }
@@ -104,9 +105,10 @@ public class MyAdapter extends BaseAdapter {
      * @param position
      */
     public void setChecked(int position) {
+        Log.i(TAG, "setChecked()");
         // Checkbox 류의 on/off는 data에 toggle을 구현하면 좀 더 쉽다.
         mItems.get(position).toggleChecked();
-        
+
         notifyDataSetChanged();
     }
 
@@ -115,6 +117,7 @@ public class MyAdapter extends BaseAdapter {
      * @param isAllChecked
      */
     public void setAllChecked(boolean isAllChecked) {
+        Log.i(TAG, "setAllChecked()");
         for (Dust d : mItems)
             d.setChecked(isAllChecked);
         

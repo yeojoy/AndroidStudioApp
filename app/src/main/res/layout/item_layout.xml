@@ -21,16 +21,20 @@
     <TextView
         android:id="@+id/tv_maxindex"
         android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="60dp"
-        android:gravity="center"
+        android:gravity="left|center_vertical"
         android:textSize="24sp"/>
     
+    <!-- focusableInTouchMode와 clickable을 false로 줘야 함. -->
     <CheckBox
         android:id="@+id/cb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:focusable="false"
-        android:focusableInTouchMode="false"/>
+        android:gravity="center"
+        android:focusableInTouchMode="false"
+        android:clickable="false"/>
 
 </LinearLayout>

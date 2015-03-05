@@ -44,6 +44,8 @@ public class MyListActivity extends Activity {
     private ListView mLv;
     private MyAdapter mAdapter;
     
+    private boolean mIsAllChecked = false;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,30 +67,37 @@ public class MyListActivity extends Activity {
     }
     
     public void onClick(View view) {
-        Request request = new Request.Builder().url(URL).build();
-        
-        client = new OkHttpClient();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                Toast.makeText(mContext, "onFailure", Toast.LENGTH_SHORT)
-                        .show();
-            }
+        if (view.getId() == R.id.btn_work) {
+            Request request = new Request.Builder().url(URL).build();
+            
+            client = new OkHttpClient();
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    Toast.makeText(mContext, "onFailure", Toast.LENGTH_SHORT)
+                            .show();
+                }
+    
+                @Override
+                public void onResponse(final Response response) throws IOException {
+                    Log.i(TAG, "onResponse()");
+                    final List<Dust> items = parseRawXmlString(response.body().string());
+                    
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Log.i(TAG, "run()");
+                            mAdapter.setItems(items);
+                        }
+                    });
+                }
+            });
+            
+        } else if (view.getId() == R.id.btn_all_check) {
+            mIsAllChecked = !mIsAllChecked;
 
-            @Override
-            public void onResponse(final Response response) throws IOException {
-                Log.i(TAG, "onResponse()");
-                final List<Dust> items = parseRawXmlString(response.body().string());
-                
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i(TAG, "run()");
-                        mAdapter.setItems(items);
-                    }
-                });
-            }
-        });
+            mAdapter.setAllChecked(mIsAllChecked);
+        }
     }
     
     public List<Dust> parseRawXmlString(String str) {
