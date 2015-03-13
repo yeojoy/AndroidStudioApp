@@ -18,6 +18,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import me.yeojoy.studio.BuildConfig;
 import me.yeojoy.studio.PushActivity;
 import me.yeojoy.studio.R;
@@ -50,14 +53,17 @@ public class MyNotiManager {
                 break;
             case 4:
                 Glide.with(context)
-                        .load(PUSH_BANNER_IMAGE_URL)
+//                        .load(PUSH_BANNER_IMAGE_URL)
+                        .load("http://www.pandawill.com/images/v/201011/1289033586.jpg")
                         .asBitmap()
                         .into(new SimpleTarget<Bitmap>(640, 480) {
                             @Override
                             public void onResourceReady(Bitmap bitmap,
                                     GlideAnimation<? super Bitmap> glideAnimation) {
                                 data.setIconResourceId(R.drawable.icon_1);
-                                notificationWithBigPicture(context, data,
+//                                notificationWithBigPicture(context, data,
+//                                        bitmap, PushActivity.class);
+                                notificationWithRemoteViews(context, data,
                                         bitmap, PushActivity.class);
                             }
                         });
@@ -240,7 +246,7 @@ public class MyNotiManager {
         if (banner == null)
             banner = BitmapFactory.decodeResource(context.getResources(),
                     R.drawable.banner);
-        
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(data.getIconResourceId())
                 .setTicker("ticker_" + data.getTitle())
@@ -262,5 +268,54 @@ public class MyNotiManager {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(data.getId(), builder.build());
+    }
+
+    /**
+     * "이.밥.차" 스타일의 Notification 구현.
+     * @param context
+     * @param data
+     * @param banner
+     * @param activityClass
+     */
+    private static void notificationWithRemoteViews(Context context,
+            NotiData data, Bitmap banner, Class<?> activityClass) {
+
+        Intent intent = new Intent(context, activityClass);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        if (banner == null)
+            banner = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.banner);
+
+        // 기본적인 Notification에 대한 정보는 있어야 함.
+        Notification.Builder builder = new Notification.Builder(context)
+                .setContentIntent(pendingIntent)
+                .setTicker(data.getTitle())
+                .setSmallIcon(data.getIconResourceId());
+
+        Notification noti = new Notification.BigPictureStyle(builder).build();
+
+        String when = new SimpleDateFormat("HH시 mm분").format(new Date());
+
+        noti.contentView = new RemoteViews(BuildConfig.APPLICATION_ID, R.layout.noti_content);
+        noti.contentView.setImageViewBitmap(R.id.iv_content, banner);
+        noti.contentView.setTextViewText(R.id.tv_title, data.getTitle());
+        noti.contentView.setTextViewText(R.id.tv_desc, data.getMessage());
+        noti.contentView.setTextViewText(R.id.tv_when, when);
+
+        noti.bigContentView = new RemoteViews(BuildConfig.APPLICATION_ID, R.layout.noti_big_content);
+        noti.bigContentView.setImageViewBitmap(R.id.iv_content, banner);
+        noti.bigContentView.setTextViewText(R.id.tv_title, data.getTitle());
+        noti.bigContentView.setTextViewText(R.id.tv_desc, data.getMessage());
+        noti.bigContentView.setTextViewText(R.id.tv_when, when);
+
+        noti.defaults = Notification.DEFAULT_VIBRATE;
+        noti.sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationManager notificationManager = (NotificationManager)
+                context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(data.getId(), noti);
     }
 }

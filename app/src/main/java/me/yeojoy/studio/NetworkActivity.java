@@ -22,8 +22,6 @@ import me.yeojoy.studio.dto.Item;
  */
 public class NetworkActivity extends Activity {
 
-    // ID가 D00220A01 인 문항의 정보를 가져옴.
-//    private static final String URL = "http://cmath.jei.com/item/D00220A01";
     private static final String URL = "http://cleanair.seoul.go.kr/air_city.htm?method=airPollutantInfoMeasureXml&msrntwCode=A";
 
 

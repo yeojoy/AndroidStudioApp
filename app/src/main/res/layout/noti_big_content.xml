@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/iv_content"
+        android:layout_width="160dp"
+        android:layout_height="189dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_launcher"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="189dp"
+        android:background="#534E54"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:textColor="#ED4500"
+            android:textSize="15dp"
+            android:text="[요.밥.차] 육즙이 없는 챱스퉥이크입니당" />
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_title"
+            android:layout_above="@+id/tv_when"
+            android:layout_marginTop="8dp"
+            android:maxLines="8"
+            android:ellipsize="end"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp"
+            android:text="오늘 밤 와인 한 잔과 함께~ 그녀와 분위기를 내볼까요?" />
+
+
+        <TextView
+            android:id="@id/tv_when"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#A9A9A9"
+            android:textSize="12dp"
+            android:text="11시 38분"/>
+    </RelativeLayout>
+
+</LinearLayout>
