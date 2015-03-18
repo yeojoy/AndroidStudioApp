@@ -295,7 +295,7 @@ public class MyNotiManager {
                 .setTicker(data.getTitle())
                 .setSmallIcon(data.getIconResourceId());
 
-        Notification noti = new Notification.BigPictureStyle(builder).build();
+        Notification noti = new Notification.InboxStyle(builder).build();
 
         String when = new SimpleDateFormat("HH시 mm분").format(new Date());
 
