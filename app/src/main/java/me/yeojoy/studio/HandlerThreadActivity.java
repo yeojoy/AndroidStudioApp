@@ -36,7 +36,7 @@ public class HandlerThreadActivity extends Activity {
         Runnable worker = new Runnable() {
             @Override
             public void run() {
-                SystemClock.sleep(3000);
+                SystemClock.sleep(5000);
 
                 Toast.makeText(HandlerThreadActivity.this,
                         "5초 작업 끝", Toast.LENGTH_SHORT).show();

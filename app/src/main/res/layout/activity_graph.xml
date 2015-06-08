@@ -16,4 +16,8 @@
         <!--app:egIndicatorColor="#FE6DA8"-->
         <!--app:egLegendHeight="40dp"-->
         <!--app:egShowStandardValue="true"/>-->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </RelativeLayout>

@@ -29,7 +29,7 @@ public class PushActivity extends FragmentActivity {
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
-    String SENDER_ID = "216234162270";
+    String SENDER_ID = "88008930626";
 
     TextView mDisplay;
     GoogleCloudMessaging gcm;

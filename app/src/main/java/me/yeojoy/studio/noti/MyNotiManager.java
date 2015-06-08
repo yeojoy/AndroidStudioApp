@@ -86,7 +86,7 @@ public class MyNotiManager {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+        PendingIntent contentIntent = PendingIntent.getActivity(context, data.getId(),
                 new Intent(context, PushActivity.class), 0);
 
         NotificationCompat.Builder mBuilder =
@@ -109,7 +109,8 @@ public class MyNotiManager {
                 R.layout.push);
 
         Intent intent = new Intent(context, activityClass);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, data.getId(),
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setAutoCancel(true)
@@ -146,7 +147,7 @@ public class MyNotiManager {
                 R.drawable.icon_1);
 
         Intent intent = new Intent(context, activityClass);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, 
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, data.getId(),
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
@@ -199,7 +200,7 @@ public class MyNotiManager {
                 R.drawable.icon_1);
 
         Intent intent = new Intent(context, activityClass);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, 
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, data.getId(),
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
@@ -240,7 +241,7 @@ public class MyNotiManager {
            Bitmap banner, Class<?> activityClass) {
 
         Intent intent = new Intent(context, activityClass);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, 
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, data.getId(),
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         if (banner == null)
@@ -281,7 +282,7 @@ public class MyNotiManager {
             NotiData data, Bitmap banner, Class<?> activityClass) {
 
         Intent intent = new Intent(context, activityClass);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, data.getId(),
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 

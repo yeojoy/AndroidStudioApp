@@ -22,7 +22,7 @@ import me.yeojoy.studio.dto.Item;
  */
 public class NetworkActivity extends Activity {
 
-    private static final String URL = "http://cleanair.seoul.go.kr/air_city.htm?method=airPollutantInfoMeasureXml&msrntwCode=A";
+    private static final String URL = "http://example.com";
 
 
     private Context mContext;
